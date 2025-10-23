@@ -1,5 +1,2 @@
 # proyecto_inf131
-
-asd
-
-carajo no me puedo morir
+sustema de gestion de escuelas deportivas
