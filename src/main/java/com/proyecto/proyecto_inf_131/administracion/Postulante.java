@@ -1,5 +1,7 @@
 package com.proyecto.proyecto_inf_131.administracion;
 
+import com.proyecto.proyecto_inf_131.Persona;
+
 public class Postulante extends Persona {
     private String matriculaUniversitaria, seguroDeSalud;
     //formularioDeInscripcion, apto; nose si estos atributos van  o no aun

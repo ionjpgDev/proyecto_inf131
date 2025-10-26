@@ -1,5 +1,6 @@
 package com.proyecto.proyecto_inf_131.administracion;
 
+import com.proyecto.proyecto_inf_131.Persona;
 import java.util.Arrays;
 
 public class Instructor extends Persona {

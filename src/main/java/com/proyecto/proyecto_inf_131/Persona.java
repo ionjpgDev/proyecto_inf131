@@ -1,4 +1,5 @@
-package com.proyecto.proyecto_inf_131.administracion;
+package com.proyecto.proyecto_inf_131;
+
 
 public class Persona {
     protected String nombres, apellidos;

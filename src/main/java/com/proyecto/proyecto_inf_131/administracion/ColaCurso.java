@@ -1,7 +1,7 @@
 package com.proyecto.proyecto_inf_131.administracion;
 
 public class ColaCurso {
-        private NodoCurso cola;
+    private NodoCurso cola;
 
     public ColaCurso() {
         this.cola = null;
