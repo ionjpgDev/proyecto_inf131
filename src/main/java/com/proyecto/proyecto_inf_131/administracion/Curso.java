@@ -11,16 +11,16 @@ public class Curso {
         this.cupos = cupos;
         this.horario = horario;
         this.inscritos = new PilaPostulante();
-        this.instructor = new Instructor( "", "", "", new String[]{""} );
+        this.instructor = new Instructor( "", "","", "", new String[]{""} );
     }
     public int cuposDisponibles(){
         return this.cupos - inscritos.getNroElement();
     }
 
     public void mostrarInscritos() {
-        System.out.println( "--------------------LISTA-DE-INSCRITOS-------------------------" );
+        System.out.println( "\t....................LISTA.DE.INSCRITOS........................." );
         this.inscritos.mostrar();
-        System.out.println( "---------------------------------------------------------------" );
+        System.out.println( "\t...............................................................\n" );
     }
 
    public void inscribir( Postulante item ) {
@@ -67,6 +67,7 @@ public class Curso {
         return "\tCurso{" +
                 "nombreDeporte='" + nombreDeporte + '\'' +
                 ", cupos=" + cupos +
+                ", instructor=" + instructor.getNombres() + " " + instructor.getApellidos()+
                 ", horario='" + horario + '\'' +
                 '}';
     }

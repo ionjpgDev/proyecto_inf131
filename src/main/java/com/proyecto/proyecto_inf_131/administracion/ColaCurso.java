@@ -15,6 +15,7 @@ public class ColaCurso {
                 item = this.eliminar();
 
                 System.out.println( item );
+                item.mostrarInscritos(); //mostrar estudiantes inscritos
 
                 tmp.agregar( item );
             }

@@ -3,38 +3,28 @@ package com.proyecto.proyecto_inf_131.administracion;
 import com.proyecto.proyecto_inf_131.Persona;
 
 public class Postulante extends Persona {
-    private String matriculaUniversitaria, seguroDeSalud;
-    //formularioDeInscripcion, apto; nose si estos atributos van  o no aun
+    Requisitos requisitos;
 
-    public Postulante(String nombres, String apellidos, String matriculaUniversitaria, String seguroDeSalud) {
-        super(nombres, apellidos);
-        this.matriculaUniversitaria = matriculaUniversitaria;
-        this.seguroDeSalud = seguroDeSalud;
+    public Postulante( String nombres, String apellidos, String ci, String celular, String matriculaUniv, String correo, String facultad, String carrera, String primerIngreso, String horario, String tipoDeSeguro, String enfermedadDeBase, String nombreDeporte ) {
+        super( nombres, apellidos, ci );
+        this.requisitos = new Requisitos( celular, matriculaUniv, correo, facultad, carrera, primerIngreso, horario, tipoDeSeguro, enfermedadDeBase, nombreDeporte );
+    }
+
+    public Postulante() {
+        super();
+        this.requisitos = new Requisitos();
     }
 
     @Override
     public String toString() {
         return "\tPostulante{" +
                 "nombres='" + nombres + '\'' +
-                "  apellidos='" + apellidos + '\'' +
-                ", seguroDeSalud='" + seguroDeSalud + '\'' +
-                ", matriculaUniversitaria='" + matriculaUniversitaria + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", ci='" + ci + '\'' +
                 '}';
     }
 
-    public String getMatriculaUniversitaria() {
-        return matriculaUniversitaria;
-    }
-
-    public void setMatriculaUniversitaria(String matriculaUniversitaria) {
-        this.matriculaUniversitaria = matriculaUniversitaria;
-    }
-
-    public String getSeguroDeSalud() {
-        return seguroDeSalud;
-    }
-
-    public void setSeguroDeSalud(String seguroDeSalud) {
-        this.seguroDeSalud = seguroDeSalud;
+    public Requisitos getRequisitos() {
+        return requisitos;
     }
 }

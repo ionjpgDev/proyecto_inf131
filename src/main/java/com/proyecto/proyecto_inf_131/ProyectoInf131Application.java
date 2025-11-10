@@ -1,7 +1,6 @@
 package com.proyecto.proyecto_inf_131;
 
 import com.proyecto.proyecto_inf_131.administracion.*;
-import com.proyecto.proyecto_inf_131.torneo.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
