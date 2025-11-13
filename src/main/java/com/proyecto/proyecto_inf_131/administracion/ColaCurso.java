@@ -13,12 +13,11 @@ public class ColaCurso {
 
             while ( !this.isVacia() ){
                 item = this.eliminar();
+                tmp.agregar( item );
 
                 System.out.println( item );
-                item.mostrarInscritos(); //mostrar estudiantes inscritos
-
-                tmp.agregar( item );
             }
+
             this.vaciar( tmp );
 
         }

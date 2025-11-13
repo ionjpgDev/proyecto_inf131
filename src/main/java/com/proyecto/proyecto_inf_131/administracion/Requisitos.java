@@ -3,9 +3,10 @@ package com.proyecto.proyecto_inf_131.administracion;
 import java.util.Scanner;
 
 public class Requisitos {
-    private String celular, matriculaUniv,correo, facultad, carrera, primerIngreso, horario, tipoDeSeguro, enfermedadDeBase, nombreDeporte;
+    private String celular, matriculaUniv,correo, facultad, carrera, primerIngreso, tipoDeSeguro, enfermedadDeBase, nombreDeporte;
+    private Horario horario;
 
-    public Requisitos( String celular, String matriculaUniv, String correo, String facultad, String carrera, String primerIngreso, String horario, String tipoDeSeguro, String enfermedadDeBase, String nombreDeporte ) {
+    public Requisitos( String celular, String matriculaUniv, String correo, String facultad, String carrera, String primerIngreso, Horario horario, String tipoDeSeguro, String enfermedadDeBase, String nombreDeporte ) {
         this.celular = celular;
         this.matriculaUniv = matriculaUniv;
         this.correo = correo;
@@ -16,6 +17,39 @@ public class Requisitos {
         this.tipoDeSeguro = tipoDeSeguro;
         this.enfermedadDeBase = enfermedadDeBase;
         this.nombreDeporte = nombreDeporte;
+    }
+
+    public Requisitos() {
+        Scanner leer = new Scanner( System.in );
+
+        System.out.print("celular: ");
+        this.celular = leer.nextLine();
+
+        System.out.print("matricula universitaria: ");
+        this.matriculaUniv = leer.nextLine();
+
+        System.out.print("correo electronico: ");
+        this.correo = leer.nextLine();
+
+        System.out.print("facultad: ");
+        this.facultad = leer.nextLine();
+
+        System.out.print("carrera: ");
+        this.carrera = leer.nextLine();
+
+        System.out.print("es su primera inscripcion: ");
+        this.primerIngreso = leer.nextLine();
+
+        this.horario = new Horario();
+
+        System.out.print("¿¿tiene seguro privado o publico??: ");
+        this.tipoDeSeguro = leer.nextLine();
+
+        System.out.print("¿Tiene alguna enfermedad de base?: ");
+        this.enfermedadDeBase = leer.nextLine();
+
+        System.out.print("Deporte: ");
+        this.nombreDeporte = leer.nextLine();
     }
 
     public String getCelular() {
@@ -66,14 +100,6 @@ public class Requisitos {
         this.primerIngreso = primerIngreso;
     }
 
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario( String horario ) {
-        this.horario = horario;
-    }
-
     public String getTipoDeSeguro() {
         return tipoDeSeguro;
     }
@@ -90,39 +116,7 @@ public class Requisitos {
         this.enfermedadDeBase = enfermedadDeBase;
     }
 
-    public Requisitos() {
-        Scanner leer = new Scanner( System.in );
 
-        System.out.print("celular: ");
-        this.celular = leer.nextLine();
-
-        System.out.print("matricula universitaria: ");
-        this.matriculaUniv = leer.nextLine();
-
-        System.out.print("correo electronico: ");
-        this.correo = leer.nextLine();
-
-        System.out.print("facultad: ");
-        this.facultad = leer.nextLine();
-
-        System.out.print("carrera: ");
-        this.carrera = leer.nextLine();
-
-        System.out.print("es su primera inscripcion: ");
-        this.primerIngreso = leer.nextLine();
-
-        System.out.print("horario a tomar: ");
-        this.horario = leer.nextLine();
-
-        System.out.print("¿¿tiene seguro privado o publico??: ");
-        this.tipoDeSeguro = leer.nextLine();
-
-        System.out.print("¿Tiene alguna enfermedad de base?: ");
-        this.enfermedadDeBase = leer.nextLine();
-
-        System.out.print("Deporte: ");
-        this.nombreDeporte = leer.nextLine();
-    }
 
     public String getNombreDeporte() {
         return nombreDeporte;
@@ -134,17 +128,25 @@ public class Requisitos {
 
     @Override
     public String toString() {
-        return "Requisitos{" +
-                "celular='" + celular + '\'' +
-                ", matriculaUniv='" + matriculaUniv + '\'' +
-                ", correo='" + correo + '\'' +
-                ", facultad='" + facultad + '\'' +
-                ", carrera='" + carrera + '\'' +
-                ", primerIngreso='" + primerIngreso + '\'' +
-                ", horario='" + horario + '\'' +
-                ", tipoDeSeguro='" + tipoDeSeguro + '\'' +
-                ", enfermedadDeBase='" + enfermedadDeBase + '\'' +
-                ", nombreDeporte='" + nombreDeporte + '\'' +
-                '}';
+        return "Requisitos{\n" +
+                "\tcelular: " + celular + '\n' +
+                "\tmatriculaUniv: " + matriculaUniv + '\n' +
+                "\tcorreo: " + correo + '\n' +
+                "\tfacultad: " + facultad + '\n' +
+                "\tcarrera: " + carrera + '\n' +
+                "\tprimerIngreso: " + primerIngreso + '\n' +
+                "\thorario: " + horario + '\n' +
+                "\ttipoDeSeguro: " + tipoDeSeguro + '\n' +
+                "\tenfermedadDeBase: " + enfermedadDeBase + '\n' +
+                "\tnombreDeporte: " + nombreDeporte + '\n' +
+                "\t}";
+    }
+
+    public Horario getHorario() {
+        return horario;
+    }
+
+    public void setHorario( Horario horario ) {
+        this.horario = horario;
     }
 }

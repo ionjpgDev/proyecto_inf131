@@ -5,7 +5,7 @@ import com.proyecto.proyecto_inf_131.Persona;
 public class Postulante extends Persona {
     Requisitos requisitos;
 
-    public Postulante( String nombres, String apellidos, String ci, String celular, String matriculaUniv, String correo, String facultad, String carrera, String primerIngreso, String horario, String tipoDeSeguro, String enfermedadDeBase, String nombreDeporte ) {
+    public Postulante( String nombres, String apellidos, String ci, String celular, String matriculaUniv, String correo, String facultad, String carrera, String primerIngreso, Horario horario, String tipoDeSeguro, String enfermedadDeBase, String nombreDeporte ) {
         super( nombres, apellidos, ci );
         this.requisitos = new Requisitos( celular, matriculaUniv, correo, facultad, carrera, primerIngreso, horario, tipoDeSeguro, enfermedadDeBase, nombreDeporte );
     }
@@ -26,5 +26,14 @@ public class Postulante extends Persona {
 
     public Requisitos getRequisitos() {
         return requisitos;
+    }
+
+    public void mostrarTodo() {
+        System.out.println(
+                "Postulante{\n" +
+                "\tnombres: " + nombres + '\n' +
+                "\tapellidos: " + apellidos + '\n' +
+                "\tci: " + ci + '\n' +
+                 requisitos + '\n' + '}' );
     }
 }

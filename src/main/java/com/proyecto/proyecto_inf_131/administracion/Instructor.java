@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class Instructor extends Persona {
     private String nombreDeporte;
-    private String[] horario;
+    private Horario horario;
 
-    public Instructor(String nombres, String apellidos, String ci, String nombreDeporte, String[] horario) {
+    public Instructor(String nombres, String apellidos, String ci, String nombreDeporte, Horario horario) {
         super(nombres, apellidos, ci );
         this.nombreDeporte = nombreDeporte;
         this.horario = horario;
@@ -21,19 +21,26 @@ public class Instructor extends Persona {
         System.out.print("deporte: ");
         this.nombreDeporte = leer.nextLine();
 
-        System.out.print("horario: ");
-        this.horario = leer.nextLine().split( "," );
-
+        this.horario = new Horario();
     }
 
     @Override
     public String toString() {
-        return "\tInstructor{" +
+        return "Instructor{" +
                 "nombres='" + nombres + '\'' +
                 ", apellidos='" + apellidos + '\'' +
-                ", nombreDeporte='" + nombreDeporte + '\'' +
-                ", horario=" + Arrays.toString(horario) +
+                ", ci='" + ci + '\'' +
                 '}';
+    }
+
+    public void mostrarTodo() {
+        System.out.println( "Instructor{\n" +
+                "\tnombres='" + nombres + '\n' +
+                "\tapellidos='" + apellidos + '\n' +
+                "\tci='" + ci + '\n' +
+                "\tnombreDeporte='" + nombreDeporte + '\n' +
+                "\thorario=" + horario.toString() +
+                '}' );
     }
 
     public String getNombreDeporte() {
@@ -44,20 +51,20 @@ public class Instructor extends Persona {
         this.nombreDeporte = nombreDeporte;
     }
 
-    public String[] getHorario() {
+
+    public boolean horario( Horario horario ){
+        return this.horario.igual( horario );
+    }
+
+    public Horario getHorario() {
         return horario;
     }
 
-    public void setHorario(String[] horario) {
+    public void setHorario( Horario horario ) {
         this.horario = horario;
     }
 
-    public boolean horario( String horario ){
-        boolean v = false;
-        for ( String hrio: this.horario )
-            if( hrio.equals( horario ) )
-                v = true;
-
-        return true;
+    public boolean igual( Instructor item ){
+        return this.ci.equals( item.getCi() );
     }
 }
