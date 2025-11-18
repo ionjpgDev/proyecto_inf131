@@ -57,15 +57,17 @@ public class Requisitos {
     }
 
     public void setCelular( String celular ) {
-        this.celular = celular;
+        if ( ! celular.isEmpty() )
+            this.celular = celular;
     }
 
     public String getMatriculaUniv() {
-        return matriculaUniv;
+            return matriculaUniv;
     }
 
     public void setMatriculaUniv( String matriculaUniv ) {
-        this.matriculaUniv = matriculaUniv;
+        if ( ! matriculaUniv.isEmpty() )
+            this.matriculaUniv = matriculaUniv;
     }
 
     public String getCorreo() {
@@ -73,7 +75,8 @@ public class Requisitos {
     }
 
     public void setCorreo( String correo ) {
-        this.correo = correo;
+        if ( ! correo.isEmpty() )
+            this.correo = correo;
     }
 
     public String getFacultad() {
@@ -81,7 +84,8 @@ public class Requisitos {
     }
 
     public void setFacultad( String facultad ) {
-        this.facultad = facultad;
+        if ( ! facultad.isEmpty() )
+            this.facultad = facultad;
     }
 
     public String getCarrera() {
@@ -89,7 +93,8 @@ public class Requisitos {
     }
 
     public void setCarrera( String carrera ) {
-        this.carrera = carrera;
+        if ( ! carrera.isEmpty() )
+            this.carrera = carrera;
     }
 
     public String getPrimerIngreso() {
@@ -97,6 +102,7 @@ public class Requisitos {
     }
 
     public void setPrimerIngreso( String primerIngreso ) {
+        if ( ! primerIngreso.isEmpty() )
         this.primerIngreso = primerIngreso;
     }
 
@@ -105,7 +111,8 @@ public class Requisitos {
     }
 
     public void setTipoDeSeguro( String tipoDeSeguro ) {
-        this.tipoDeSeguro = tipoDeSeguro;
+        if ( ! tipoDeSeguro.isEmpty() )
+            this.tipoDeSeguro = tipoDeSeguro;
     }
 
     public String getEnfermedadDeBase() {
@@ -113,7 +120,8 @@ public class Requisitos {
     }
 
     public void setEnfermedadDeBase( String enfermedadDeBase ) {
-        this.enfermedadDeBase = enfermedadDeBase;
+        if ( ! enfermedadDeBase.isEmpty() )
+            this.enfermedadDeBase = enfermedadDeBase;
     }
 
 
@@ -123,7 +131,8 @@ public class Requisitos {
     }
 
     public void setNombreDeporte( String nombreDeporte ) {
-        this.nombreDeporte = nombreDeporte;
+        if ( ! nombreDeporte.isEmpty() )
+            this.nombreDeporte = nombreDeporte;
     }
 
     @Override
@@ -146,7 +155,9 @@ public class Requisitos {
         return horario;
     }
 
-    public void setHorario( Horario horario ) {
-        this.horario = horario;
+    public void setHorario( ) {
+        Horario horario = new Horario();
+        if ( !( horario.getHora().isEmpty() || horario.getTurno().isEmpty() ) )
+            this.horario = horario;
     }
 }

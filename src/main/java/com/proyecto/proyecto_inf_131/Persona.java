@@ -1,6 +1,8 @@
 package com.proyecto.proyecto_inf_131;
 
 
+import com.proyecto.proyecto_inf_131.administracion.Instructor;
+
 import java.util.Scanner;
 
 public class Persona {
@@ -30,7 +32,8 @@ public class Persona {
     }
 
     public void setCi( String ci ) {
-        this.ci = ci;
+        if ( !ci.isEmpty() )
+            this.ci = ci;
     }
 
     public String getNombres() {
@@ -38,7 +41,8 @@ public class Persona {
     }
 
     public void setNombres(String nombres) {
-        this.nombres = nombres;
+        if ( !nombres.isEmpty() )
+            this.nombres = nombres;
     }
 
     public String getApellidos() {
@@ -46,6 +50,24 @@ public class Persona {
     }
 
     public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+        if ( !apellidos.isEmpty() )
+            this.apellidos = apellidos;
+    }
+
+    public boolean igual( Persona item ){
+        return this.ci.equals( item.getCi() );
+    }
+
+    public void editarDatos(){
+        Scanner leer = new Scanner( System.in );
+
+        System.out.print("Nombre: ");
+        this.setNombres( leer.nextLine() );
+
+        System.out.print("Apellidos: ");
+        this.setApellidos( leer.nextLine() );
+
+        System.out.print("Ci: ");
+        this.setCi( leer.nextLine() );
     }
 }

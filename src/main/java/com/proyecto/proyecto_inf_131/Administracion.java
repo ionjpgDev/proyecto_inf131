@@ -24,28 +24,28 @@ public class Administracion {
         this.cursos = new ColaCurso();
 
         this.datosPrb();//borrar o comentar
-        this.acciones();
+        //this.acciones();
     }
 
     private void datosPrb(){
-        this.crearCurso( new Curso( "fut", 21,new Horario("tarde","15:00") ) );
-        this.crearCurso( new Curso( "bas", 21,new Horario("tarde","16:00") ) );
-        this.crearCurso( new Curso( "natacion", 21,new Horario("noche","21:00") ) );
+        this.crearCurso( new Curso( "fut", 21,new Horario("tarde","15:00"),10 ) );
+        this.crearCurso( new Curso( "bas", 21,new Horario("tarde","16:00"), 5 ) );
+        this.crearCurso( new Curso( "natacion", 21,new Horario("noche","21:00"), 15 ) );
 
         this.agregarPostulante( new Postulante( "nom1","ape1","ci1","cel1","matri1","c@rreo","fal1","carr1","no",new Horario("tarde","16:00"),"publico","no","bas" ) );
         this.agregarPostulante( new Postulante( "nom2","ape2","ci2","cel1","matri2","c@rreo","fal1","carr1","no",new Horario("noche","21:00"),"publico","no", "natacion" ) );
-        this.agregarPostulante( new Postulante( "nom2","ape3","ci3","cel1","matri3","c@rreo","fal1","carr1","no",new Horario("tarde","15:00"),"publico","no", "fut" ) );
+        this.agregarPostulante( new Postulante( "nom3","ape3","ci3","cel1","matri3","c@rreo","fal1","carr1","no",new Horario("tarde","15:00"),"publico","no", "fut" ) );
 
         this.agregarInstructor( new Instructor( "freddy","mercury","123", "fut",new Horario("tarde","15:00") ) );
         this.agregarInstructor( new Instructor( "mick","marciano","124","natacion",new Horario("noche","21:00") ) );
         this.agregarInstructor( new Instructor( "axl","rosas","125","bas",new Horario("tarde","16:00") ) );
 
     }
-    private void acciones(){//muestra de como funcionaria el sistema
+    public void acciones(){//muestra de como funcionaria el sistema
         while ( v ) {
-            System.out.print("-----ADMINISTRAR-----\n 0 -> salir\n 1 -> instructores\n 2 -> postulantes\n 3 -> cursos\n / $> ");
+            System.out.print("-----ADMINISTRAR-----\n1 -> instructores\n2 -> postulantes\n3 -> cursos\n0 -> salir\n/ $> ");
             switch ( leer.nextLine() ){
-                case "0": System.out.println("luke soy tu padre"); v= false ;break;
+                case "0": v= false ;break;
                 case "1": this.accionesInstructores( "/instructores"); break;
                 case "2": this.accionesPostulantes("/postulantes"); break;
                 case "3": this.accionesCursos( "/cursos" ); break;
@@ -109,17 +109,37 @@ public class Administracion {
             item.mostrarTodo();
     }
     public void eliminarCurso(){
-        Curso itemCurso = this.buscarCurso();
-        ColaCurso tmp = new ColaCurso();
+        Curso eliminar = this.buscarCurso();
+        ColaCurso tmpCurso = new ColaCurso();
 
-        while ( ! this.cursos.isVacia() && itemCurso != null ){
+        while ( ! this.cursos.isVacia() && eliminar != null ){
             Curso item = this.cursos.eliminar();
 
-            if ( itemCurso != item )
-                tmp.agregar( item );
+            if ( eliminar != item ) // no agrega a la lista el curso a eliminar
+                tmpCurso.agregar( item );
+            else { //de cada lista de cursos que tienen los instructores elimina el curso seleccionado
+                ColaInstructor tmpInstructor = new ColaInstructor();
+
+                while( ! this.instructores.isVacia() ){
+                    Instructor itemInstructor = this.instructores.eliminar();
+                    tmpInstructor.agregar( itemInstructor );
+
+                    ColaCurso tmpInstructorCursos = new ColaCurso();
+                    while( ! itemInstructor.getCursos().isVacia() ){
+                        Curso itemCurso = itemInstructor.getCursos().eliminar();
+
+                        if ( eliminar != itemCurso ) // no agrega a la lista del instructor el elemento a eliminar
+                            tmpInstructorCursos.agregar( itemCurso );
+                    }
+                    itemInstructor.getCursos().vaciar( tmpInstructorCursos );
+
+                }
+                this.instructores.vaciar( tmpInstructor );
+
+            }
         }
 
-        this.cursos.vaciar( tmp );
+        this.cursos.vaciar( tmpCurso );
     }
     //FIN administracion del Cursos
 
@@ -150,8 +170,11 @@ public class Administracion {
             Curso curso = this.cursos.eliminar();
             tmpCola.agregar(  curso );
 
-            if ( curso.getNombreDeporte().equals( item.getNombreDeporte() ) && item.getHorario().igual( curso.getHorario() ) )
+            if ( curso.getNombreDeporte().equals( item.getNombreDeporte() )
+                    && item.getHorario().igual( curso.getHorario() ) ){
                 curso.setInstructor( item );
+                item.agregarCurso( curso );//agrega Curso a la lista de cursos de Instructor
+            }
 
         }
 
@@ -239,19 +262,23 @@ public class Administracion {
         v = true;
     }
     public void agregarPostulante( Postulante item ){
-        this.postulantes.agregar( item );// lista general de todos los inscritos
-
         ColaCurso tmpCola = new ColaCurso();//agregar postulante a las listas de forma dinamica
         while ( ! this.cursos.isVacia() ){
             Curso curso = this.cursos.eliminar();
             tmpCola.agregar( curso );
 
             if( curso.getHorario().igual( item.getRequisitos().getHorario() )
-                    && curso.getNombreDeporte().equals( item.getRequisitos().getNombreDeporte() ) )
-                curso.inscribir( item );
+                    && curso.getNombreDeporte().equals( item.getRequisitos().getNombreDeporte() ) ){
+
+                if ( ! curso.inscribir( item ) )//si la condicion es true no agrego
+                    this.postulantes.agregar( item );// lista general de todos los inscritos
+            }
+
         }
 
         this.cursos.vaciar( tmpCola );
+
+
     }
     public void mostrarPostulantes(){
         System.out.println("-----lista-De-Postulantes-a-las-escuelas-deportivas-UMSA------");
@@ -285,14 +312,14 @@ public class Administracion {
             item.mostrarTodo();
     }
     public void eliminarPostulante(){
-        PilaPostulante tmpPpostulate = new PilaPostulante();
-        Postulante itemPostulante = this.buscarPostulante();
+        PilaPostulante tmpPostulate = new PilaPostulante();
+        Postulante itemPostulante = this.buscarPostulante(); // ingresar por entrada estandar al postulante a eliminar
 
         while ( ! this.postulantes.isVacia() && itemPostulante != null ){
             Postulante item = this.postulantes.eliminar();
 
             if( itemPostulante != item ) // no agrega al postulante buscado
-                tmpPpostulate.agregar( itemPostulante );//lista general
+                tmpPostulate.agregar( itemPostulante );//lista general
             else{//buscar en los cursos al postulante
                 ColaCurso tmpCcurso = new ColaCurso();
 
@@ -307,10 +334,22 @@ public class Administracion {
             }
         }
 
-        this.postulantes.vaciar( tmpPpostulate );
+        this.postulantes.vaciar( tmpPostulate );
 
 
     }
     //FIN administracion del postulantes
 
+
+    public ColaInstructor getInstructores() {
+        return instructores;
+    }
+
+    public ColaCurso getCursos() {
+        return cursos;
+    }
+
+    public PilaPostulante getPostulantes() {
+        return postulantes;
+    }
 }

@@ -8,8 +8,10 @@ public class Curso {
     private int cupos;
     private Instructor instructor;
     private PilaPostulante inscritos;
+    private int nroClases ;
 
-    public Curso( String nombre, int cupos, Horario horario ) {
+    public Curso( String nombre, int cupos, Horario horario, int nroClases ) {
+        this.nroClases = nroClases;
         this.nombreDeporte = nombre;
         this.cupos = cupos;
         this.horario = horario;
@@ -30,6 +32,9 @@ public class Curso {
 
         this.inscritos = new PilaPostulante();
         this.instructor = new Instructor( "", "","", "", new Horario( "","") );
+
+        System.out.print("numero de clases: ");
+        this.nroClases = Integer.parseInt( leer.nextLine() );
     }
 
     public int cuposDisponibles(){
@@ -42,11 +47,14 @@ public class Curso {
         System.out.println( "\t...............................................................\n" );
     }
 
-    public void inscribir( Postulante item ) {
-        if ( this.cuposDisponibles() <= 0)
+    public boolean inscribir( Postulante item ) {
+        boolean v = this.cuposDisponibles() <= 0;
+        if ( v )
             System.out.println("_____CUPOS__LLENOS_____");
         else
             this.inscritos.agregar( item );
+
+        return v;
     }
 
     public void darDeBaja( String ci ) {
@@ -124,5 +132,17 @@ public class Curso {
                 ", instructor=" + instructor.getNombres() + " " + instructor.getApellidos()+
                 ", horario='" + horario + '\'' +
                 '}';
+    }
+
+    public PilaPostulante getInscritos() {
+        return inscritos;
+    }
+
+    public int getNroClases() {
+        return nroClases;
+    }
+
+    public void setNroClases( int nroClases ) {
+        this.nroClases = nroClases;
     }
 }
