@@ -14,6 +14,12 @@
                 <td th:text="${curso.horario}">nombre</td>
                 <td th:text="${curso.cupos}">nombre</td>
                 <td th:text="${curso.nroClases}">nombre</td>
+                <td><a class="enlace_ver"
+                       th:attr="href=${enlace_ver + '?deporte=' + curso.nombreDeporte +'&disponible=' + curso.cuposDisponibles
+                        + '&cupos=' + curso.cupos + '&instructor=' + curso.instructor.nombres + ' ' + curso.instructor.apellidos
+                         + '&turno=' + curso.horario.turno + '&hora=' + curso.horario.hora + '&clases=' + curso.nroClases  }">ver</a></td>
+                <td><a class="enlace_eliminar"
+                       th:attr="href=${enlace_eliminar + '?deporte=' + curso.nombreDeporte + '&turno=' + curso.horario.turno + '&hora=' + curso.horario.hora }">elimnar</a></td>
             </tr>
             </tbody>
         </table>

@@ -35,3 +35,33 @@ body {
     background-color: orange;
     color: black;
 }
+
+.enlace_eliminar{
+    padding: 0.5em;
+    margin: 0.5 em;
+    background-color: red;
+    cursor: pointer;
+
+    text-decoration:none;
+    color: white;
+}
+
+.enlace_ver{
+    padding: 0.5em;
+    margin: 0.5em;
+    background-color: green;
+    cursor: pointer;
+
+    text-decoration:none;
+    color: white;
+}
+
+.enlace_eliminar:hover{
+    background-color: pink;
+    color: black;
+}
+
+.enlace_ver:hover{
+    background-color: cyan;
+    color: black;
+}

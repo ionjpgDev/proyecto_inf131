@@ -1,0 +1,19 @@
+<ul xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <div th:fragment="contenido">
+        <table class="table">
+            <thead>
+            <tr >
+                <th  scope="col"
+                     th:each="item : ${data}"
+                     th:text="${item}" >cabeceras</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td  th:each="item : ${cuerpo}"
+                     th:text="${item}" >cuerpo</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</ul>

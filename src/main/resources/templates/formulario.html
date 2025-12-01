@@ -1,13 +1,12 @@
 <div xmlns:th="http://www.thymeleaf.org" th:replace="base">
     <div th:fragment="contenido" >
-        <form>
+        <form th:attr="action=${ruta}" method="post">
             <div class="mb-3"
                 th:each="item: ${datos}">
                 <label class="form-label"
-                    th:attr="for=${item}"
-                    th:text="${item}">label</label>
-                <input class="form-control"
-                       th:attr="id=${item}" placeholder="Ingrese datos">
+                       th:text="${item}">label</label>
+                <input type="text" class="form-control"
+                       th:attr="name=${item}"placeholder="Ingrese datos">
             </div>
 
             <button type="submit" class="btn btn-primary">Enviar</button>

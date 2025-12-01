@@ -103,6 +103,22 @@ public class Administracion {
 
         return devolver;
     }
+    private Curso buscarCurso( String nombreDeporte, Horario horario ){
+        ColaCurso tmp = new ColaCurso();
+        Curso devolver = null;
+
+        while ( ! this.cursos.isVacia() ){
+            Curso item = this.cursos.eliminar();
+            tmp.agregar( item );
+
+            if ( item.getHorario().igual( horario ) && item.getNombreDeporte().equals( nombreDeporte ) )
+                devolver = item;
+        }
+
+        this.cursos.vaciar( tmp );
+
+        return devolver;
+    }
     public void verCurso( ){
         Curso item = this.buscarCurso();
         if ( item != null )
@@ -110,6 +126,39 @@ public class Administracion {
     }
     public void eliminarCurso(){
         Curso eliminar = this.buscarCurso();
+        ColaCurso tmpCurso = new ColaCurso();
+
+        while ( ! this.cursos.isVacia() && eliminar != null ){
+            Curso item = this.cursos.eliminar();
+
+            if ( eliminar != item ) // no agrega a la lista el curso a eliminar
+                tmpCurso.agregar( item );
+            else { //de cada lista de cursos que tienen los instructores elimina el curso seleccionado
+                ColaInstructor tmpInstructor = new ColaInstructor();
+
+                while( ! this.instructores.isVacia() ){
+                    Instructor itemInstructor = this.instructores.eliminar();
+                    tmpInstructor.agregar( itemInstructor );
+
+                    ColaCurso tmpInstructorCursos = new ColaCurso();
+                    while( ! itemInstructor.getCursos().isVacia() ){
+                        Curso itemCurso = itemInstructor.getCursos().eliminar();
+
+                        if ( eliminar != itemCurso ) // no agrega a la lista del instructor el elemento a eliminar
+                            tmpInstructorCursos.agregar( itemCurso );
+                    }
+                    itemInstructor.getCursos().vaciar( tmpInstructorCursos );
+
+                }
+                this.instructores.vaciar( tmpInstructor );
+
+            }
+        }
+
+        this.cursos.vaciar( tmpCurso );
+    }
+    public void eliminarCurso( String nombreDeporte, Horario horario ){
+        Curso eliminar = this.buscarCurso( nombreDeporte, horario );
         ColaCurso tmpCurso = new ColaCurso();
 
         while ( ! this.cursos.isVacia() && eliminar != null ){
@@ -205,14 +254,59 @@ public class Administracion {
 
         return devolver;
     }
+    public Instructor buscarInstructor( String ci ){
+        Instructor devolver = null;
+        ColaInstructor tmp = new ColaInstructor();
+
+        while ( ! this.instructores.isVacia() ){
+            Instructor item = this.instructores.eliminar();
+            tmp.agregar( item );
+
+            if ( item.getCi().equals( ci ) )
+                devolver = item;
+        }
+        this.instructores.vaciar( tmp );
+
+        return devolver;
+    }
     public void verInstructor(){
         Instructor item = this.buscarInstructor();
 
         if( item != null )
             item.mostrarTodo();
     }
+    public Instructor verInstructor( String ci ){
+        Instructor item = this.buscarInstructor( ci );
+
+        return item;
+    }
     public void eliminarInstructor(){
         Instructor itemInstructor = this.buscarInstructor();
+        ColaInstructor tmpIns = new ColaInstructor();
+
+        while ( ! this.instructores.isVacia() && itemInstructor != null ){
+            Instructor item = this.instructores.eliminar();
+
+            if ( item != itemInstructor )
+                tmpIns.agregar( item );
+            else{
+                ColaCurso tmpCur = new ColaCurso();
+
+                while ( ! this.cursos.isVacia() ) {
+                    Curso itemCurso = this.cursos.eliminar();
+                    tmpCur.agregar( itemCurso );
+
+                    if( itemCurso.getInstructor().igual( item ) )
+                        itemCurso.setInstructor( "","","" );
+                }
+
+                this.cursos.vaciar( tmpCur );
+            }
+        }
+        this.instructores.vaciar( tmpIns );
+    }
+    public void eliminarInstructor( String ci ){
+        Instructor itemInstructor = this.buscarInstructor( ci );
         ColaInstructor tmpIns = new ColaInstructor();
 
         while ( ! this.instructores.isVacia() && itemInstructor != null ){
@@ -285,6 +379,9 @@ public class Administracion {
         this.postulantes.mostrar();
         System.out.println("--------------------------------------------------------------");
     }
+    public void inscribirPostulante( Postulante item ){
+        this.postulantes.agregar( item );
+    }
     private Postulante buscarPostulante(){
         Scanner leer = new Scanner( System.in );
 
@@ -306,10 +403,30 @@ public class Administracion {
 
         return devolver;
     }
+    private Postulante buscarPostulante( String ci ){
+        PilaPostulante tmp = new PilaPostulante();
+        Postulante devolver = null;
+
+        while( !this.postulantes.isVacia() ){
+            Postulante item = this.postulantes.eliminar();
+            tmp.agregar( item );
+
+            if ( item.getCi().equals( ci ) )
+                devolver = item;
+        }
+
+        this.postulantes.vaciar( tmp );
+
+        return devolver;
+    }
     public void verPostulante() {
         Postulante item = this.buscarPostulante();
         if( item != null )
             item.mostrarTodo();
+    }
+    public Postulante verPostulante( String ci ) {
+        Postulante item = this.buscarPostulante( ci );
+        return item ;
     }
     public void eliminarPostulante(){
         PilaPostulante tmpPostulate = new PilaPostulante();
@@ -320,6 +437,33 @@ public class Administracion {
 
             if( itemPostulante != item ) // no agrega al postulante buscado
                 tmpPostulate.agregar( itemPostulante );//lista general
+            else{//buscar en los cursos al postulante
+                ColaCurso tmpCcurso = new ColaCurso();
+
+                while ( !this.cursos.isVacia() ){
+                    Curso itemCurso = this.cursos.eliminar();
+                    tmpCcurso.agregar( itemCurso );
+
+                    itemCurso.darDeBaja( item.getCi() );//lista secundaria
+                }
+
+                this.cursos.vaciar( tmpCcurso );
+            }
+        }
+
+        this.postulantes.vaciar( tmpPostulate );
+
+
+    }
+    public void eliminarPostulante( String ci ){
+        PilaPostulante tmpPostulate = new PilaPostulante();
+        Postulante itemPostulante = this.buscarPostulante( ci );
+
+        while ( ! this.postulantes.isVacia() && itemPostulante != null ){
+            Postulante item = this.postulantes.eliminar();
+
+            if( itemPostulante != item ) // no agrega al postulante buscado
+                tmpPostulate.agregar( item );//lista general
             else{//buscar en los cursos al postulante
                 ColaCurso tmpCcurso = new ColaCurso();
 

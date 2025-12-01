@@ -9,7 +9,7 @@ public class Instructor extends Persona {
     private Horario horario;
     private ColaCurso cursos;
 
-    public Instructor(String nombres, String apellidos, String ci, String nombreDeporte, Horario horario) {
+    public Instructor( String nombres, String apellidos, String ci, String nombreDeporte, Horario horario) {
         super(nombres, apellidos, ci );
         this.nombreDeporte = nombreDeporte;
         this.horario = horario;

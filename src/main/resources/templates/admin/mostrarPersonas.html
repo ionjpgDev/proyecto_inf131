@@ -13,6 +13,10 @@
                 <td th:text="${persona.nombres}">nombre</td>
                 <td th:text="${persona.apellidos}">apellidos</td>
                 <td th:text="${persona.ci}">ci</td>
+                <td><a class="enlace_ver"
+                       th:attr="href=${enlace_ver + '?ci=' + persona.ci}">ver</a></td>
+                <td><a class="enlace_eliminar"
+                       th:attr="href=${enlace_eliminar + '?ci=' + persona.ci}">eliminar</a></td>
             </tr>
             </tbody>
         </table>
