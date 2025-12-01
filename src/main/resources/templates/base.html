@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>INF-131</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body style="text-align: center;">
+    <nav th:replace="nav :: nav"></nav>
+    <main class="contenido">
+        <div th:replace="${template} :: contenido"></div>
+    </main>
+    <footer th:replace="footer :: footer"></footer>
+</body>
+</html>

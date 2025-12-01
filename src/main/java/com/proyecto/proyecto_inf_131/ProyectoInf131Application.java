@@ -2,6 +2,7 @@ package com.proyecto.proyecto_inf_131;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
 import com.proyecto.proyecto_inf_131.administracion.*;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Scanner;
@@ -11,7 +12,8 @@ public class ProyectoInf131Application {
     static Scanner leer = new Scanner( System.in );
 
 	public static void main(String[] args) {
-        //SpringApplication.run(ProyectoInf131Application.class, args);
+        SpringApplication.run(ProyectoInf131Application.class, args);
+        /*
         Administracion admin = new Administracion();
 
         boolean v = true;
@@ -32,5 +34,7 @@ public class ProyectoInf131Application {
                 default: break;
             }
         }
+
+         */
 	}
 }

@@ -1,0 +1,15 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="base">
+
+    <div th:fragment="contenido" >
+        <h1>PANEL DE ADMINISTRACION</h1>
+        <h2>acciones</h2>
+        <div>
+            <a class="enlace_paneles"
+               th:each="item : ${paneles}"
+               th:attr="href=${item[1]}"
+               th:text="${item[0]}">Panel</a>
+        </div>
+
+    </div>
+
+</div>

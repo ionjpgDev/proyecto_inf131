@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+main div{
+    margin: 4%;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color:pink;
+}
+
+.contenido {
+    flex: 1;
+    width:100%;
+}
+
+.enlace_paneles{
+    padding: 1em;
+    margin: 1em;
+    background-color: chocolate;
+    cursor: pointer;
+
+    text-decoration:none;
+    color: white;
+}
+
+.enlace_paneles:hover{
+    background-color: orange;
+    color: black;
+}

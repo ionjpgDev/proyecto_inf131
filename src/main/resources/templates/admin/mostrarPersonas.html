@@ -1,0 +1,20 @@
+<ul xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <div th:fragment="contenido">
+        <table class="table">
+            <thead>
+            <tr >
+                <th  scope="col"
+                     th:each="item : ${data}"
+                     th:text="${item}" >cabeceras</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="persona : ${personas}">
+                <td th:text="${persona.nombres}">nombre</td>
+                <td th:text="${persona.apellidos}">apellidos</td>
+                <td th:text="${persona.ci}">ci</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</ul>

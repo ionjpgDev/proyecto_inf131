@@ -1,0 +1,21 @@
+<ul xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <div th:fragment="contenido">
+        <table class="table">
+            <thead>
+            <tr >
+                <th  scope="col"
+                     th:each="item : ${data}"
+                     th:text="${item}" >cabeceras</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="curso : ${cursos}">
+                <td th:text="${curso.nombreDeporte}">nombre</td>
+                <td th:text="${curso.horario}">nombre</td>
+                <td th:text="${curso.cupos}">nombre</td>
+                <td th:text="${curso.nroClases}">nombre</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</ul>
