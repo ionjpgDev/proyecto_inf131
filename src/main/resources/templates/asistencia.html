@@ -1,0 +1,22 @@
+<ul xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <div th:fragment="contenido">
+        <table class="table">
+            <thead>
+            <tr >
+                <th  scope="col"
+                     th:each="item : ${data}"
+                     th:text="${item}" >cabeceras</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="alumno : ${alumnos}">
+                <td th:text="${alumno.nombres}">nombre</td>
+                <td th:text="${alumno.apellidos}">nombre</td>
+                <td th:text="${alumno.asistencias}">nombre</td>
+                <td><a class="enlace_ver"
+                       th:attr="href=${enlace_asistencia + '?ci=' + alumno.ci }">ver</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</ul>

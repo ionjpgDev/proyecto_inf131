@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class PanelPostulante {
     private Postulante usr = new Postulante("","","","","","","","","",new Horario("",""),"","","");
 
+    public PanelPostulante(){}
     public PanelPostulante( PilaPostulante lista ){
         if( this.login( lista ) )
             acciones("/Perfil");
@@ -24,6 +25,29 @@ public class PanelPostulante {
 
         System.out.print( "Ci: " );
         usr.setCi( leer.nextLine() );
+
+        PilaPostulante tmp = new PilaPostulante();
+        while ( ! lista.isVacia() ){
+            Postulante itemPostulante = lista.eliminar();
+            tmp.agregar( itemPostulante );
+
+            if ( this.usr.igual( itemPostulante ) ) {
+                this.usr = itemPostulante;
+                v = true;
+                break;
+            }
+
+        }
+        lista.vaciar( tmp );
+
+        return v;
+    }
+    public boolean login( String nombres, String apellidos, String ci, PilaPostulante lista ){
+        boolean v = false;
+
+        this.usr.setNombres( nombres );
+        this.usr.setApellidos( apellidos );
+        this.usr.setCi( ci );
 
         PilaPostulante tmp = new PilaPostulante();
         while ( ! lista.isVacia() ){
@@ -67,4 +91,7 @@ public class PanelPostulante {
         usr.mostrarTodo();
     }
 
+    public Postulante getUsr() {
+        return usr;
+    }
 }

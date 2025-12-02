@@ -1,0 +1,15 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <div th:fragment="contenido" >
+        <form th:attr="action=${ruta}" method="post">
+            <div class="mb-3"
+                 th:each="item: ${datos}">
+                <label class="form-label"
+                       th:text="${item[0]}">label</label>
+                <input type="text" class="form-control"
+                       th:attr="name=${item[0]}, value=${item[1]}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</div>

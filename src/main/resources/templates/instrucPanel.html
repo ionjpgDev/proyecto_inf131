@@ -1,1 +1,8 @@
-<h1>intructor panel</h1>
+<div xmlns:th="http://www.thymeleaf.org" th:replace="base">
+    <div th:fragment="contenido" >
+        <a class="enlace_paneles"
+           th:each="item : ${paneles}"
+           th:attr="href=${item[1]}"
+           th:text="${item[0]}">Panel</a>
+    </div>
+</div>
